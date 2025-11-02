@@ -1,0 +1,79 @@
+# #############################################################
+# # .gitignore global pentru proiecte MATLAB & Simulink
+# #############################################################
+
+# --- Secțiunea 1: Fișiere P-Code și Backup ---
+# Ignoră fișierele P-code (binare/obfuscate)
+*.p
+
+# Ignoră fișierele de autosave ale editorului MATLAB
+*.asv
+*~
+
+# Ignoră fișierele de backup
+*.bak
+*.orig
+
+# --- Secțiunea 2: Fișiere Compilate (MEX) ---
+# Ignoră fișierele MEX compilate pentru diferite platforme
+*.mex*
+*.mexw32
+*.mexw64
+*.mexglx
+*.mexa64
+*.mexmaci
+*.mexmaci64
+
+# --- Secțiunea 3: Artefacte Simulink ---
+# Ignoră cache-ul Simulink
+slprj/
+*.slxc
+*.slx.original
+*.slpc
+_Simulink_Raccel_*/
+
+# Ignoră rapoartele de generare de cod
+rtwdemo_*/
+*_ert_rtw/
+*_grt_rtw/
+*.model.html
+
+# --- Secțiunea 4: Pachete App & Toolbox ---
+# Ignoră pachetele de instalare (build artifacts)
+*.mlappinstall
+*.mltbx
+
+# --- Secțiunea 5: Dump-uri de Crash MATLAB ---
+matlab_crash_dump.*
+*.log
+*.pending
+
+# --- Secțiunea 6: Fișiere de Date (.mat) - ALEGEȚI O OPȚIUNE ---
+
+# Opțiunea A: Ignoră TOATE fișierele .mat (Recomandat dacă .mat sunt REZULTATE)
+# Acestea sunt adesea fișiere binare mari care conțin rezultate de simulare.
+# Dacă aveți fișiere .mat care sunt date de INTRARE, adăugați-le manual cu:
+# git add -f calea/catre/fisierul_de_date.mat
+*.mat
+
+# Opțiunea B: Permite fișierele .mat (Recomandat dacă .mat sunt DATE DE INTRARE)
+# Ștergeți linia "*.mat" de mai sus dacă fișierele .mat
+# sunt date de intrare esențiale pentru proiectul dvs.
+# Puteți alege să ignorați doar fișierele .mat dintr-un folder de "rezultate":
+# /results/*.mat
+
+
+# --- Secțiunea 7: Artefacte Generale OS/Editor ---
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE-uri comune
+.vscode/
+.idea/
