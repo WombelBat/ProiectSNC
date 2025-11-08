@@ -31,12 +31,12 @@ tspab = p*Lspab * Te;
 
 spab_data_load = load("Ursu_spab_60min.mat");
 spab_data_temp = spab_data_load.Ursu_spab_60min;
-
+% 
 y_spab = spab_data_temp.simout.Data((2*N*p+1) +27 +22 : end-1 );
 u_spab = spab_data_temp.comanda.Data((2*N*p+1) +27 +22 : end-1 );
 
-% y_spab = spab_data_temp.simout.Data((2*N*p+1) +27 +22 : end-1 );
-% u_spab = spab_data_temp.comanda.Data((2*N*p+1) +27 +22 : end-1 );
+% y_spab = spab_data_temp.simout.Data((2*N*p+1)  : end-1 );
+% u_spab = spab_data_temp.comanda.Data((2*N*p+1) : end-1 );
 
 Ts_spab = spab_data_load.Te;
 spab_data = iddata(y_spab,u_spab,Ts_spab);
@@ -54,21 +54,44 @@ spab_data = iddata(y_spab,u_spab,Ts_spab);
 t_med = getTrend(spab_data,0);
 spab_data_cent = detrend(spab_data,t_med);
 
+% filtram
 [b_butt,a_butt] =butter(1, 0.2);
-y_spab_filtrat = filter(b_butt,a_butt,y_spab);
-y_spab_filtrat = y_spab_filtrat(6+11: end );
-u_spab_filtrat = u_spab(6+11:end);
+% y_spab_filtrat = filter(b_butt,a_butt,y_spab);
+y_spab_filtrat = filter(b_butt,a_butt,spab_data_cent.OutputData); % cu detrend
 
-figure
-subplot(2,1,1)
-plot(y_spab)
+% se intampla pentru ca dupa filtrarre tot nu arata bine datele nu trebuie
+% y_spab_filtrat = y_spab_filtrat(6+11: end );
+% u_spab_filtrat = u_spab(6+11:end);
+
+u_spab_filtrat = spab_data_cent.InputData;
+
+% figure
+% subplot(2,1,1)
+% plot(y_spab)
 data_spab_filt = iddata(y_spab_filtrat,u_spab_filtrat,Ts_spab);
-subplot(2,1,2)
-plot(y_spab_filtrat)
+% subplot(2,1,2)
+% plot(y_spab_filtrat)
 
+% separate data
 eData = data_spab_filt(1:Lspab);
 vData = data_spab_filt(Lspab+1 :end);
-nk = delayest(data_spab_filt);
+% timp mort
+nk =min([tmort, delayest(data_spab_filt)]);
 
-M = struct([1: data_spab_filt.na , 1:data_spab_filt.nb , nk])
+% find data na nb
+M = struc(1:10,1:10,nk);
 
+V = arxstruc(eData.InputData,eData.OutputData,vData.InputData,vData.OutputData,M);
+
+% 
+
+% selstruc(V,0)
+% ordin = selstruc(V,'plot');
+
+%  din model cele mai bune
+na = 8;
+nb  =5;
+
+m_arx = arx(eData, [na nb nk]);
+[ymod,fit,ic]=compare(m_arx,vData);
+compare(m_arx,vData)
