@@ -40,7 +40,7 @@ t_out_spab =t_out_spab((2*N*p+1) +27 +22 :length(spab_data_temp.comanda.Data) -1
 y_spab = spab_data_temp.simout.Data((2*N*p+1) +27 +22 : end-1 );
 u_spab = spab_data_temp.comanda.Data((2*N*p+1) +27 +22 : end-1 );
 
-winpin = [t_out_spab y_spab u_spab ];
+winpin = [y_spab u_spab ];
 save('DateBXY.txt','-ascii','winpin')
 
 % y_spab = spab_data_temp.simout.Data((2*N*p+1)  : end-1 );
@@ -364,4 +364,6 @@ title("raspuns corectat al modelului final")
 subplot(2,1,2)
 step(c * m_final)
 title("raspuns original modelului final ")
-ursuS1.simout
+%%
+
+
