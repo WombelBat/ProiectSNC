@@ -79,24 +79,24 @@ y_spab_filtrat = filter(b_butt,a_butt,spab_data_cent.OutputData); % cu detrend
 
 u_spab_filtrat = spab_data_cent.InputData;
 
-plotFreq(y_spab,1/Te)
-legend( "Spectrul Iesirii Nefiltrate (y_spab)")
-title("Spectrul Iesirii Nefiltrate (y_spab)")
-
+% plotFreq(y_spab,1/Te)
+% legend( "Spectrul Iesirii Nefiltrate (y_spab)")
+% title("Spectrul Iesirii Nefiltrate (y_spab)")
+% 
 data_spab_filt = iddata(y_spab_filtrat,u_spab_filtrat,Ts_spab);
-
-plotFreq(y_spab_filtrat,1/Te)
-title("Spectrul Iesirii Filtrate")
-legend("Spectrul Iesirii Filtrate")
-
-
-plotFreq(data_spab_filt.OutputData,1/Te,legend = "Spectrul Iesirea filtrata")
-title("Spectrul Iesirea filtrata")
-legend("Spectrul Iesirea filtrata")
-
-plotFreq(data_spab_filt.InputData, 1/Te)
-title("Spectrul Intrarea filtrata")
-legend("Spectrul Intrarea filtrata")
+% 
+% plotFreq(y_spab_filtrat,1/Te)
+% title("Spectrul Iesirii Filtrate")
+% legend("Spectrul Iesirii Filtrate")
+% 
+% 
+% plotFreq(data_spab_filt.OutputData,1/Te,legend = "Spectrul Iesirea filtrata")
+% title("Spectrul Iesirea filtrata")
+% legend("Spectrul Iesirea filtrata")
+% 
+% plotFreq(data_spab_filt.InputData, 1/Te)
+% title("Spectrul Intrarea filtrata")
+% legend("Spectrul Intrarea filtrata")
 
 % separate data
 eData = data_spab_filt(1:Lspab);
@@ -131,22 +131,22 @@ nb  =5; %5
 m_arx = arx(eData, [na nb nk]);
 % this just gives fittness also get the others
 [~,fit_arx,~]=compare(m_arx,vData);
-figure
-sgtitle('Validare si Analiza Reziduuri Model ARX')
-subplot(2,1,1)
-compare(m_arx,vData)
+% figure
+% sgtitle('Validare si Analiza Reziduuri Model ARX')
+% subplot(2,1,1)
+% compare(m_arx,vData)
 [E_arx,R_arx] = resid(vData,m_arx);
-subplot(2,1,2)
-resid(vData,m_arx);
+% subplot(2,1,2)
+% resid(vData,m_arx);
 
 loss_arx = m_arx.Report.Fit.LossFcn;
 fpe_arx = fpe(m_arx);
 mse_arx = mean(E_arx.OutputData.^2);
-figure('Name', 'Analiza Stabilitate - ARX');
-subplot(2,2,1); step(m_arx); title('Raspuns la treapta (ARX)');
-subplot(2,2,2); pzmap(m_arx); title('Diagrama Poli-Zerouri (ARX)');
-subplot(2,2,3); nyquist(m_arx); title('Diagrama Nyquist (ARX)');
-subplot(2,2,4); bode(m_arx); title('Diagrama Bode (ARX)');
+% figure('Name', 'Analiza Stabilitate - ARX');
+% subplot(2,2,1); step(m_arx); title('Raspuns la treapta (ARX)');
+% subplot(2,2,2); pzmap(m_arx); title('Diagrama Poli-Zerouri (ARX)');
+% subplot(2,2,3); nyquist(m_arx); title('Diagrama Nyquist (ARX)');
+% subplot(2,2,4); bode(m_arx); title('Diagrama Bode (ARX)');
 
 
 % figure
@@ -154,14 +154,14 @@ subplot(2,2,4); bode(m_arx); title('Diagrama Bode (ARX)');
 
 amp = y_st/c;
 amp2 = amp/dcgain(m_arx);
-
-figure("Name","Grafic de comparatie a corectie amplitdini (ARX)")
-subplot(2,1,1)
-step(m_arx*amp2 *c);
-title("raspuns corectat al modelului (ARX)")
-subplot(2,1,2)
-step(c * m_arx)
-title("raspuns original modelului (ARX)")
+% 
+% figure("Name","Grafic de comparatie a corectie amplitdini (ARX)")
+% subplot(2,1,1)
+% step(m_arx*amp2 *c);
+% title("raspuns corectat al modelului (ARX)")
+% subplot(2,1,2)
+% step(c * m_arx)
+% title("raspuns original modelului (ARX)")
 %%
 % armax model
 
@@ -179,23 +179,23 @@ title("raspuns original modelului (ARX)")
 % end
 load("armax_model.mat")
 
-figure
-sgtitle('Validare si Analiza Reziduuri Model ARMAX')
-subplot(2,1,1)
-compare(m_armax,vData)
+% figure
+% sgtitle('Validare si Analiza Reziduuri Model ARMAX')
+% subplot(2,1,1)
+% compare(m_armax,vData)
 [E_armax,R_armax] = resid(vData,m_armax);
-subplot(2,1,2)
-resid(vData,m_armax);
+% subplot(2,1,2)
+% resid(vData,m_armax);
 
 
 loss_armax = m_armax.Report.Fit.LossFcn;
 fpe_armax = fpe(m_armax);
 mse_armax = mean(E_armax.OutputData.^2);
-figure('Name', 'Analiza Stabilitate - ARMAX');
-    subplot(2,2,1); step(m_armax); title('Raspuns la treapta (ARMAX)');
-    subplot(2,2,2); pzmap(m_armax); title('Diagrama Poli-Zerouri (ARMAX)');
-    subplot(2,2,3); nyquist(m_armax); title('Diagrama Nyquist (ARMAX)');
-    subplot(2,2,4); bode(m_armax); title('Diagrama Bode (ARMAX)');
+% figure('Name', 'Analiza Stabilitate - ARMAX');
+%     subplot(2,2,1); step(m_armax); title('Raspuns la treapta (ARMAX)');
+%     subplot(2,2,2); pzmap(m_armax); title('Diagrama Poli-Zerouri (ARMAX)');
+%     subplot(2,2,3); nyquist(m_armax); title('Diagrama Nyquist (ARMAX)');
+%     subplot(2,2,4); bode(m_armax); title('Diagrama Bode (ARMAX)');
 
 % figure
 % step(m_final)
@@ -203,13 +203,13 @@ figure('Name', 'Analiza Stabilitate - ARMAX');
 amp = y_st/c;
 amp2 = amp/dcgain(m_armax);
 
-figure("Name","Grafic de comparatie a corectie amplitdini ARMAX")
-subplot(2,1,1)
-step(m_armax*amp2 *c);
-title("raspuns corectat al modelului ARMAX")
-subplot(2,1,2)
-step(c * m_armax)
-title("raspuns original modelului ARMAX")
+% figure("Name","Grafic de comparatie a corectie amplitdini ARMAX")
+% subplot(2,1,1)
+% step(m_armax*amp2 *c);
+% title("raspuns corectat al modelului ARMAX")
+% subplot(2,1,2)
+% step(c * m_armax)
+% title("raspuns original modelului ARMAX")
  
 %%
 % bj model
@@ -243,23 +243,23 @@ title("raspuns original modelului ARMAX")
 
 load("bj_model_data.mat")
 
-figure
-sgtitle('Validare si Analiza Reziduuri Model BJ')
-subplot(2,1,1)
-compare(m_bj,vData);
+% figure
+% sgtitle('Validare si Analiza Reziduuri Model BJ')
+% subplot(2,1,1)
+% compare(m_bj,vData);
 
 [E_bj,R_bj] = resid(vData,m_bj);
-subplot(2,1,2)
-resid(vData,m_bj);
+% subplot(2,1,2)
+% resid(vData,m_bj);
 
 loss_bj = m_bj.Report.Fit.LossFcn;
 fpe_bj = fpe(m_bj);
 mse_bj = mean(E_bj.OutputData.^2);
-figure('Name', 'Analiza Stabilitate - BJ');
-    subplot(2,2,1); step(m_bj); title('Raspuns la treapta (BJ)');
-    subplot(2,2,2); pzmap(m_bj); title('Diagrama Poli-Zerouri (BJ)');
-    subplot(2,2,3); nyquist(m_bj); title('Diagrama Nyquist (BJ)');
-    subplot(2,2,4); bode(m_bj); title('Diagrama Bode (BJ)');
+% figure('Name', 'Analiza Stabilitate - BJ');
+%     subplot(2,2,1); step(m_bj); title('Raspuns la treapta (BJ)');
+%     subplot(2,2,2); pzmap(m_bj); title('Diagrama Poli-Zerouri (BJ)');
+%     subplot(2,2,3); nyquist(m_bj); title('Diagrama Nyquist (BJ)');
+%     subplot(2,2,4); bode(m_bj); title('Diagrama Bode (BJ)');
 
 % figure
 % step(m_final)
@@ -267,13 +267,13 @@ figure('Name', 'Analiza Stabilitate - BJ');
 amp = y_st/c;
 amp2 = amp/dcgain(m_bj);
 
-figure("Name","Grafic de comparatie a corectie amplitdini BJ")
-subplot(2,1,1)
-step(m_bj*amp2 *c);
-title("raspuns corectat al modelului BJ")
-subplot(2,1,2)
-step(c * m_bj)
-title("raspuns original modelului BJ")
+% figure("Name","Grafic de comparatie a corectie amplitdini BJ")
+% subplot(2,1,1)
+% step(m_bj*amp2 *c);
+% title("raspuns corectat al modelului BJ")
+% subplot(2,1,2)
+% step(c * m_bj)
+% title("raspuns original modelului BJ")
 
 
   %%
@@ -301,23 +301,23 @@ title("raspuns original modelului BJ")
 
 load("oe_model_data.mat")
 
-figure
-sgtitle('Validare si Analiza Reziduuri Model OE')
-subplot(2,1,1)
-compare(m_oe,vData)
+% figure
+% sgtitle('Validare si Analiza Reziduuri Model OE')
+% subplot(2,1,1)
+% compare(m_oe,vData)
 
 [E_oe,R_oe] = resid(vData,m_oe);
-subplot(2,1,2)
-resid(vData,m_oe);
+% subplot(2,1,2)
+% resid(vData,m_oe);
 
 loss_oe = m_oe.Report.Fit.LossFcn;
 fpe_oe = fpe(m_oe);
 mse_oe = mean(E_oe.OutputData.^2);
-figure('Name', 'Analiza Stabilitate - OE');
-    subplot(2,2,1); step(m_oe); title('Raspuns la treapta (OE)');
-    subplot(2,2,2); pzmap(m_oe); title('Diagrama Poli-Zerouri (OE)');
-    subplot(2,2,3); nyquist(m_oe); title('Diagrama Nyquist (OE)');
-    subplot(2,2,4); bode(m_oe); title('Diagrama Bode (OE)');
+% figure('Name', 'Analiza Stabilitate - OE');
+%     subplot(2,2,1); step(m_oe); title('Raspuns la treapta (OE)');
+%     subplot(2,2,2); pzmap(m_oe); title('Diagrama Poli-Zerouri (OE)');
+%     subplot(2,2,3); nyquist(m_oe); title('Diagrama Nyquist (OE)');
+%     subplot(2,2,4); bode(m_oe); title('Diagrama Bode (OE)');
 
 % figure
 % step(m_final)
@@ -325,27 +325,27 @@ figure('Name', 'Analiza Stabilitate - OE');
 amp = y_st/c;
 amp2 = amp/dcgain(m_oe);
 
-figure("Name","Grafic de comparatie a corectie amplitdini OE")
-subplot(2,1,1)
-step(m_oe*amp2 *c);
-title("raspuns corectat al modelului OE")
-subplot(2,1,2)
-step(c * m_oe)
-title("raspuns original modelului OE")
+% figure("Name","Grafic de comparatie a corectie amplitdini OE")
+% subplot(2,1,1)
+% step(m_oe*amp2 *c);
+% title("raspuns corectat al modelului OE")
+% subplot(2,1,2)
+% step(c * m_oe)
+% title("raspuns original modelului OE")
    %%
 % comparatie
 
-Modele = ["ARX"; "ARMAX"; "BJ"; "OE"];
-FIT_val = [fit_arx; fit_armax; fit_bj; fit_oe];
-Loss_val = [loss_arx; loss_armax; loss_bj; loss_oe]*1e4;
-FPE_val = [fpe_arx; fpe_armax; fpe_bj; fpe_oe]*1e4;
-MSE_val = [mse_arx; mse_armax; mse_bj; mse_oe]*1e4;
-
-% Creare si afisare tabel
-T = table(Modele, FIT_val, Loss_val, FPE_val, MSE_val, ...
-    'VariableNames', {'Model', 'FIT (%)', 'Loss Function', 'FPE', 'MSE'});
-
-disp(T);
+% Modele = ["ARX"; "ARMAX"; "BJ"; "OE"];
+% FIT_val = [fit_arx; fit_armax; fit_bj; fit_oe];
+% Loss_val = [loss_arx; loss_armax; loss_bj; loss_oe]*1e4;
+% FPE_val = [fpe_arx; fpe_armax; fpe_bj; fpe_oe]*1e4;
+% MSE_val = [mse_arx; mse_armax; mse_bj; mse_oe]*1e4;
+% 
+% % Creare si afisare tabel
+% T = table(Modele, FIT_val, Loss_val, FPE_val, MSE_val, ...
+%     'VariableNames', {'Model', 'FIT (%)', 'Loss Function', 'FPE', 'MSE'});
+% 
+% disp(T);
 
 %%
 % aplificare model
@@ -357,13 +357,13 @@ m_final = m_bj;
 amp = y_st/c;
 amp2 = amp/dcgain(m_final);
 
-figure("Name","Grafic de comparatie a corectie amplitdini DIN MODELUL ALES")
-subplot(2,1,1)
-step(m_final*amp2 *c);
-title("raspuns corectat al modelului final")
-subplot(2,1,2)
-step(c * m_final)
-title("raspuns original modelului final ")
+% figure("Name","Grafic de comparatie a corectie amplitdini DIN MODELUL ALES")
+% subplot(2,1,1)
+% step(m_final*amp2 *c);
+% title("raspuns corectat al modelului final")
+% subplot(2,1,2)
+% step(c * m_final)
+% title("raspuns original modelului final ")
 %%
 
 
