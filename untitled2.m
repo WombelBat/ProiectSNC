@@ -8,7 +8,7 @@ d=2;
 
 delta1=0;tt1=0;delta2=0;tt2=0;
 w1 =1;
-w2=1;
+w2=w1;
 zeta1=0.9;
 zeta2= zeta1;
 A = [1 -0.7];
