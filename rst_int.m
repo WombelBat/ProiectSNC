@@ -1,5 +1,8 @@
-function [R,S,T,Bm,Am,B,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2)
+function [R,S,T,Bm,Am,B_org,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2)
     % aflare rst
+    z = tf('z');
+    Hs = 1 - z^-1;
+
     %% P1
     if nargin <7
         error("mai pune parametri");
@@ -38,13 +41,23 @@ function [R,S,T,Bm,Am,B,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zet
     Hp = tf(Hp.Numerator,Hp.Denominator,Te,'Variable','z^-1');
     nb = length(Hp.Numerator{1}) -1;
     na = length(Hp.Denominator{1}) -1;
-    z = tf('z');
+    
     Hp = Hp * (z^-d);
     
     [B,A] = tfdata(Hp,'v');
+    B_org = B;
     A = A(1:na+1);
+    A_org   = A;
     
-    
+    A = tf(A_org,1,Te,'Variable','z^-1');
+    A = A* Hs;
+    [A,~] = tfdata(A,'v');
+    na = length(A) -1;
+
+    % B = tf(B_org,1,Te,'Variable','z^-1');
+    % B = B* Hr;
+    % [B,~] = tfdata(B,'v');
+
     %% P5 afla ns nR
     nS = nb+d-1;
     nR = na -1;
@@ -78,7 +91,11 @@ function [R,S,T,Bm,Am,B,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zet
     
     SR = M\P';
     S = SR(1:nS);
-    
+
+    S  = tf(S',1,Te,'Variable','z^-1');
+    S  = S * Hs;
+    [S ,~] = tfdata(S ,'v');
+    S=S';
     R = SR(nS+1:end);
     if length(S) == nS && length(R) == nR
         disp("good");

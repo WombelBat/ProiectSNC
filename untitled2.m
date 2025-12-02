@@ -18,4 +18,4 @@ B= [0 0.3];
 % Hp = c2d(Hp,Te,'zoh');
 Hp = tf(B,A,Te,'Variable','z');
 Hp  = d2c(Hp,'zoh');
-[R,S,T,Bm,Am,B,A]=rst(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2);
+[R,S,T,Bm,Am,B,A]=rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2);
