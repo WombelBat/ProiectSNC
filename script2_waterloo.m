@@ -2,9 +2,17 @@ clc
 close all
 clear
 
-r= 15.2;
+y_st= 15.2;
+r =173;
+c = 173;
+amp = y_st/c;
+
 
 load("bj_model_data.mat")
+amp2 = amp/dcgain(m_bj);
+
+
+
 nb = 2;
 nA =2;
 nk = 1;
@@ -13,7 +21,7 @@ d=nk;
 
 
 A = m_bj.F;
-B= m_bj.B;
+B= m_bj.B * amp2*c;
 
 Te = m_bj.Ts;
 
