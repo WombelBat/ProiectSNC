@@ -22,7 +22,7 @@ d=nk;
 
 A = m_bj.F;
 B= m_bj.B * amp2*c;
-
+B= m_bj.B * amp2;
 Te = m_bj.Ts;
 
 tt1 = 33;
@@ -38,7 +38,11 @@ zeta2 = tseta_fun(delta2)
 
 Hp = tf(B,A,Te,'Variable','z^-1');
 Hp  = d2c(Hp,'zoh');
-[R,S,T,Bm,Am,B,A] = rst(Hp,Te,d,delta1,tt1,delta1,tt1);
+[R,S,T,Bm,Am,B,A] = rst_int(Hp,Te,d,delta1,tt1,delta1,tt1);
+
+% B = B/c
+
+% B= B * amp2;
 
 
 

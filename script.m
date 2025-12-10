@@ -357,13 +357,13 @@ m_final = m_bj;
 amp = y_st/c;
 amp2 = amp/dcgain(m_final);
 
-% figure("Name","Grafic de comparatie a corectie amplitdini DIN MODELUL ALES")
-% subplot(2,1,1)
-% step(m_final*amp2 *c);
-% title("raspuns corectat al modelului final")
-% subplot(2,1,2)
-% step(c * m_final)
-% title("raspuns original modelului final ")
+figure("Name","Grafic de comparatie a corectie amplitdini DIN MODELUL ALES")
+subplot(2,1,1)
+step(m_final*amp2 *c);
+title("raspuns corectat al modelului final")
+subplot(2,1,2)
+step(c * m_final)
+title("raspuns original modelului final ")
 %%
 
 
