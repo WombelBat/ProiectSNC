@@ -54,7 +54,6 @@ matlab_crash_dump.*
 # Acestea sunt adesea fișiere binare mari care conțin rezultate de simulare.
 # Dacă aveți fișiere .mat care sunt date de INTRARE, adăugați-le manual cu:
 # git add -f calea/catre/fisierul_de_date.mat
-*.mat
 
 # Opțiunea B: Permite fișierele .mat (Recomandat dacă .mat sunt DATE DE INTRARE)
 # Ștergeți linia "*.mat" de mai sus dacă fișierele .mat

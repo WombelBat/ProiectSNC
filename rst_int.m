@@ -108,5 +108,5 @@ function [R,S,T,Bm,Am,B_org,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1
     T = sum(P)/sum(B);  
     % sau
     % T = tf(P,B,Te,'Variable','z^-1')
-
+    
 end
