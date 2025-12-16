@@ -8,10 +8,10 @@ c = 173;
 amp = y_st/c;
 
 
+% load("arx_model.mat")
 load("bj_model_data.mat")
+
 amp2 = amp/dcgain(m_bj);
-
-
 
 nb = 2;
 nA =2;
@@ -21,16 +21,19 @@ d=nk;
 
 
 A = m_bj.F;
-B= m_bj.B * amp2*c;
+% A = m_bj.A;
+% B= m_bj.B * amp2*c;
 B= m_bj.B * amp2;
 Te = m_bj.Ts;
 
-tt1 = 33;
+tt2 = 330;
+
+tt1 = tt2/10;
 delta1=0;
-% zeta1 = tseta_fun(delta1)
+zeta1 = tseta_fun(delta1)
 % w1 = calc_omega(tt1,zeta1)  
 
-tt2 = 330;
+
 delta2 = 0.15;
 zeta2 = tseta_fun(delta2)
 % tt2 = tt1;
@@ -38,7 +41,8 @@ zeta2 = tseta_fun(delta2)
 
 Hp = tf(B,A,Te,'Variable','z^-1');
 Hp  = d2c(Hp,'zoh');
-[R,S,T,Bm,Am,B,A] = rst_int(Hp,Te,d,delta1,tt1,delta1,tt1);
+[R,S,T,Bm,Am,B,A,M,P] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2);
+
 
 % B = B/c
 

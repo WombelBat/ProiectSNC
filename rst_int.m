@@ -1,4 +1,4 @@
-function [R,S,T,Bm,Am,B_org,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2)
+function [R,S,T,Bm,Am,B_org,A_org,M,P] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1,zeta2,w1,w2)
     % aflare rst
     z = tf('z');
     Hs = 1 - z^-1;
@@ -61,6 +61,7 @@ function [R,S,T,Bm,Am,B_org,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1
 
     %% P5 afla ns nR
     nS = nb+d-1;
+    %% 
     nR = na -1;
     
     nS = nS+1;% ca sa includa si termenul liber
@@ -89,6 +90,7 @@ function [R,S,T,Bm,Am,B_org,A_org] = rst_int(Hp,Te,d,delta1,tt1,delta2,tt2,zeta1
     
     % refacem un pic P
     P =[P zeros(1,na+nb +d -length(P) )];
+    
     
     SR = M\P';
     S = SR(1:nS);
