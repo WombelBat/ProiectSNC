@@ -26,10 +26,10 @@ A = m_bj.F;
 B= m_bj.B * amp2;
 Te = m_bj.Ts;
 
-tt2 = 330;
+tt2 = 360;
 
-tt1 = tt2/10;
-delta1=0;
+tt1 = tt2-60;
+delta1=1.5;
 zeta1 = tseta_fun(delta1)
 % w1 = calc_omega(tt1,zeta1)  
 
